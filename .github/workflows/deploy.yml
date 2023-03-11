@@ -34,9 +34,12 @@ jobs:
     - name: Start service
       run: |
         cd ${{ secrets.WORKSPACE }}
+        ls -la
         sudo systemd-run \
           --unit=${{ env.unit }} \
+          --same-dir \
           -p Restart=always \
           -E MAX_API_KEY=${{ secrets.MAX_API_KEY }} \
           -E MAX_API_SECRET=${{ secrets.MAX_API_SECRET }} \
-          ./bbgo run --config bbgo.yaml
+          -E HOME=${{ secrets.WORKSPACE }} \
+          ./bbgo run
