@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  unit: bbgo
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19
+
+    - name: Build
+      run: go build -o bbgo ./cmd/bbgo/main.go
+
+    - name: Stop and disable service
+      continue-on-error: true
+      run: |
+        sudo systemctl stop ${{ env.unit }}
+        sudo systemctl disable ${{ env.unit }}
+        sudo systemctl reset-failed ${{ env.unit }}
+    - name: Copy files
+      run: |
+        mkdir -p ${{ secrets.WORKSPACE }}
+        cp -rf ${pwd} ${{ secrets.WORKSPACE }}
+    - name: Start service
+      run: |
+        cd ${{ secrets.WORKSPACE }}
+        sudo systemd-run \
+          --unit=${{ env.unit }} \
+          -p Restart=always \
+          -E MAX_API_KEY=${{ secrets.MAX_API_KEY }} \
+          -E MAX_API_SECRET=${{ secrets.MAX_API_SECRET }} \
+          ./bbgo run --config bbgo.yaml
