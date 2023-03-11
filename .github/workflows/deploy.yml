@@ -34,7 +34,6 @@ jobs:
     - name: Start service
       run: |
         cd ${{ secrets.WORKSPACE }}
-        ls -la
         sudo systemd-run \
           --unit=${{ env.unit }} \
           --same-dir \
