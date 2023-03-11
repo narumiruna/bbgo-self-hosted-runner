@@ -1,16 +1,4 @@
 ---
-build:
-  dir: build
-  imports:
-  - github.com/narumiruna/bbgo-self-hosted-runner
-  targets:
-  - name: bbgo-amd64-linux
-    os: linux
-    arch: amd64
-  - name: bbgo-arm64-darwin
-    os: darwin
-    arch: arm64
-
 exchangeStrategies:
   - on: max
     template:
