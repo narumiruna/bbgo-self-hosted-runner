@@ -30,7 +30,7 @@ jobs:
     - name: Copy files
       run: |
         mkdir -p ${{ secrets.WORKSPACE }}
-        cp -rf ${pwd} ${{ secrets.WORKSPACE }}
+        cp -rf $(pwd) ${{ secrets.WORKSPACE }}
     - name: Start service
       run: |
         cd ${{ secrets.WORKSPACE }}

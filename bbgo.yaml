@@ -2,7 +2,7 @@
 build:
   dir: build
   imports:
-  - github.com/narumiruna/bbgo-template
+  - github.com/narumiruna/bbgo-self-hosted-runner
   targets:
   - name: bbgo-amd64-linux
     os: linux
