@@ -27,10 +27,12 @@ jobs:
         sudo systemctl stop ${{ env.unit }}
         sudo systemctl disable ${{ env.unit }}
         sudo systemctl reset-failed ${{ env.unit }}
+
     - name: Copy files
       run: |
         mkdir -p ${{ secrets.WORKSPACE }}
         cp -rf . ${{ secrets.WORKSPACE }}
+
     - name: Start service
       run: |
         cd ${{ secrets.WORKSPACE }}
