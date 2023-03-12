@@ -34,8 +34,8 @@ jobs:
         cp -rf . ${{ secrets.WORKSPACE }}
 
     - name: Start service
+      working-directory: ${{ secrets.WORKSPACE }}
       run: |
-        cd ${{ secrets.WORKSPACE }}
         sudo systemd-run \
           --unit=${{ env.unit }} \
           --same-dir \
