@@ -30,11 +30,11 @@ jobs:
 
     - name: Copy files
       run: |
-        mkdir -p ${{ secrets.WORKSPACE }}
-        cp -rf . ${{ secrets.WORKSPACE }}
+        mkdir -p ${{ vars.WORKSPACE }}
+        cp -rf . ${{ vars.WORKSPACE }}
 
     - name: Start service
-      working-directory: ${{ secrets.WORKSPACE }}
+      working-directory: ${{ vars.WORKSPACE }}
       run: |
         sudo systemd-run \
           --unit=${{ env.unit }} \
@@ -42,5 +42,5 @@ jobs:
           -p Restart=always \
           -E MAX_API_KEY=${{ secrets.MAX_API_KEY }} \
           -E MAX_API_SECRET=${{ secrets.MAX_API_SECRET }} \
-          -E HOME=${{ secrets.WORKSPACE }} \
+          -E HOME=${{ vars.WORKSPACE }} \
           ./bbgo run
