@@ -62,6 +62,7 @@ jobs:
     - name: Start service
       working-directory: ${{ vars.WORKSPACE }}
       run: |
+        chmod +x bbgo
         sudo systemd-run \
           --unit=${{ env.unit }} \
           --same-dir \
