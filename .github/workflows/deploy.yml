@@ -25,6 +25,15 @@ jobs:
       with:
         go-version: ${{ matrix.go-version }}
 
+    - uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/go-build
+          ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+
     - name: Build
       run: |
         GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o bbgo ./cmd/bbgo
