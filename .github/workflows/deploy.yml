@@ -57,7 +57,8 @@ jobs:
     - name: Copy files
       run: |
         mkdir -p ${{ vars.WORKSPACE }}
-        cp -rf . ${{ vars.WORKSPACE }}
+        cp bbgo ${{ vars.WORKSPACE }}
+        cp bbgo.yaml ${{ vars.WORKSPACE }}
 
     - name: Start service
       working-directory: ${{ vars.WORKSPACE }}
