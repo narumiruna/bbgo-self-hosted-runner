@@ -36,7 +36,7 @@ jobs:
 
     - name: Build
       run: |
-        GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o bbgo ./cmd/bbgo
+        CGO_ENABLED=1 GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o bbgo ./cmd/bbgo
 
     - uses: actions/upload-artifact@v3
       with:
