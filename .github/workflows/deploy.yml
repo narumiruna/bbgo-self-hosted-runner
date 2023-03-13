@@ -27,8 +27,7 @@ jobs:
 
     - name: Build
       run: |
-        GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o bbgo-${{ matrix.os }}-${{ matrix.arch }} ./cmd/bbgo
-        mv bbgo-${{ matrix.os }}-${{ matrix.arch }} bbgo
+        GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o bbgo ./cmd/bbgo
 
     - uses: actions/upload-artifact@v3
       with:
